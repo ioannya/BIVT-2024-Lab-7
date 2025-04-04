@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Lab_6
+namespace Lab_7
 {
     public class Green_4
     {
@@ -79,8 +79,8 @@ namespace Lab_6
             private string _name;
             private Participant[] _participants;
 
-            protected string Name => _name;
-            protected Participant[] Participants => _participants;
+            public string Name => _name;
+            public Participant[] Participants => _participants;
 
             public Discipline(string name)
             {
