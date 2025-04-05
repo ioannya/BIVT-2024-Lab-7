@@ -164,6 +164,15 @@ namespace Lab_7
                                 break;
                             }
                         }
+                        Participant updatedParticipant = new Participant(participant.Name, participant.Surname);
+                        for (int i = 0; i < jumps.Length; i++)
+                        {
+                            if (jumps[i] != 0)
+                            {
+                                updatedParticipant.Jump(jumps[i]);
+                            }
+                        }
+                        Participants[index] = updatedParticipant;
                     }
                 }
             }
