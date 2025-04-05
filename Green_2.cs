@@ -20,6 +20,10 @@ namespace Lab_7
             }
             public string Name => _name;
             public string Surname => _surname;
+            public void Print()
+            {
+                Console.WriteLine($"Имя: {Name}, Фамилия: {Surname}");
+            }
         }
 
         public class Student : Human
@@ -27,24 +31,22 @@ namespace Lab_7
             private int[] _marks;
             private int _count;
             private static int _excellentCount;
+            private bool _wasExcellent;
+
 
             public Student(string name, string surname) : base(name, surname)
             {
                 _marks = new int[4];
                 _count = 0;
-                _excellentCount = 0;
+                _wasExcellent = false;
             }
-
+            public static int ExcellentAmount => _excellentCount;
             public int[] Marks
             {
                 get
                 {
-                    if (_marks == null)
-                    {
-                        return default;
-                    }
-                    var a = new int[_marks.Length];
-                    Array.Copy(_marks, a, _marks.Length);
+                    var a = new int[_count];
+                    Array.Copy(_marks, a, _count);
                     return a;
                 }
                 
@@ -72,18 +74,20 @@ namespace Lab_7
                     {
                         if (m < 4) return false;
                     }
+                    if (!_wasExcellent)
+                    {
+                        _excellentCount++;
+                        _wasExcellent = true;
+                    }
                     return true;
                 }
             }
-            public static int ExcellentAmount => _excellentCount;
             public void Exam(int mark)
             {
                 if (_count < _marks.Length && mark <= 5 && mark >= 2)
                 {
                     _marks[_count] = mark;
                     _count++;
-                    if(_count == 4 && IsExcellent)
-                        _excellentCount++;
                 }
             }
 
