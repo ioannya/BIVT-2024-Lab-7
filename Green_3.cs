@@ -119,7 +119,7 @@ namespace Lab_7
                     Student key = students[i];
                     int j = i - 1;
 
-                    while (j >= 0 && students[j].ID < key.ID)
+                    while (j >= 0 && students[j].ID > key.ID)
                     {
                         students[j + 1] = students[j];
                         j = j - 1;
