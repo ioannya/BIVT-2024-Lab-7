@@ -9,7 +9,7 @@ namespace Lab_7
 {
     public class Green_4
     {
-        public struct Participant
+        public class Participant
         {
             private string _name;
             private string _surname;
@@ -129,10 +129,11 @@ namespace Lab_7
                 {
                     Participant participant = Participants[index];
                     double bestJump = participant.BestJump;
-                    participant.Jump(bestJump);
-                    participant.Jump(0);
-                    participant.Jump(0);
-                    Participants[index] = participant;
+                    Participant updated = new Participant(participant.Name, participant.Surname);
+                    updated.Jump(bestJump);
+                    updated.Jump(0);
+                    updated.Jump(0);
+                    Participants[index] = updated;
                 }
             }
             public override void Print()
@@ -167,10 +168,7 @@ namespace Lab_7
                         Participant updatedParticipant = new Participant(participant.Name, participant.Surname);
                         for (int i = 0; i < jumps.Length; i++)
                         {
-                            if (jumps[i] != 0)
-                            {
-                                updatedParticipant.Jump(jumps[i]);
-                            }
+                            updatedParticipant.Jump(jumps[i]);
                         }
                         Participants[index] = updatedParticipant;
                     }
