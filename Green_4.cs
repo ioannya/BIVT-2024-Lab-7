@@ -9,7 +9,7 @@ namespace Lab_7
 {
     public class Green_4
     {
-        public class Participant
+        public struct Participant
         {
             private string _name;
             private string _surname;
@@ -23,9 +23,9 @@ namespace Lab_7
             }
 
 
-            public string Name => _name ?? default;
-            public string Surname => _surname ?? default;
-            public double[] Jumps => _res?.ToArray();
+            public string Name => _name;
+            public string Surname => _surname;
+            public double[] Jumps => _res;
             public double BestJump
             {
                 get
@@ -110,7 +110,7 @@ namespace Lab_7
                 Participant.Sort(_participants);
             }
             public abstract void Retry(int index);
-            public virtual void Print()
+            public void Print()
             {
                 Console.WriteLine($"Дисциплина: {Name}");
                 Console.WriteLine("Участники:");
@@ -136,15 +136,7 @@ namespace Lab_7
                     Participants[index] = updated;
                 }
             }
-            public override void Print()
-            {
-                Console.WriteLine($"Дисциплина: {Name}");
-                Console.WriteLine("Участники:");
-                foreach (var participant in Participants)
-                {
-                    Console.WriteLine($"Имя: {participant.Name}, Фамилия: {participant.Surname}, Результаты: {string.Join(", ", participant.Jumps)}");
-                }
-            }
+           
         }
         public class HighJump : Discipline
         {
@@ -165,24 +157,10 @@ namespace Lab_7
                                 break;
                             }
                         }
-                        Participant updatedParticipant = new Participant(participant.Name, participant.Surname);
-                        for (int i = 0; i < jumps.Length; i++)
-                        {
-                            updatedParticipant.Jump(jumps[i]);
-                        }
-                        Participants[index] = updatedParticipant;
                     }
                 }
             }
-            public override void Print()
-            {
-                Console.WriteLine($"Дисциплина: {Name}");
-                Console.WriteLine("Участники:");
-                foreach (var participant in Participants)
-                {
-                    Console.WriteLine($"Имя: {participant.Name}, Фамилия: {participant.Surname}, Результаты: {string.Join(", ", participant.Jumps)}");
-                }
-            }
+           
         }
     }
 }
