@@ -147,25 +147,18 @@ namespace Lab_7
                 {
                     Participant participant = Participants[index];
                     double[] jumps = participant.Jumps;
+                    Participant updatedParticipant = new Participant(participant.Name, participant.Surname);
+
                     if (jumps != null && jumps.Length > 0)
                     {
-                        for (int i = jumps.Length - 1; i >= 0; i--)
-                        {
-                            if(jumps[i] != 0)
-                            {
-                                jumps[i] = 0;
-                                break;
-                            }
-                        }
-                        Participant updatedParticipant = new Participant(participant.Name, participant.Surname);
-                        for (int i = 0; i < jumps.Length; i++)
+                        for (int i = 0; i < jumps.Length - 1; i++)
                         {
                             updatedParticipant.Jump(jumps[i]);
                         }
-                        Participants[index] = updatedParticipant;
                     }
+
+                    Participants[index] = updatedParticipant;
                 }
-            }
            
         }
     }
