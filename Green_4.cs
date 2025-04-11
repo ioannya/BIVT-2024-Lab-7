@@ -25,7 +25,7 @@ namespace Lab_7
 
             public string Name => _name;
             public string Surname => _surname;
-            public double[] Jumps => _res;
+            public double[] Jumps => _res.ToArray();
             public double BestJump
             {
                 get
@@ -125,41 +125,45 @@ namespace Lab_7
             public LongJump() : base("Long jump") { }
             public override void Retry(int index)
             {
-                if (index >= 0 && index < Participants.Length)
-                {
-                    Participant participant = Participants[index];
-                    double bestJump = participant.BestJump;
-                    Participant updated = new Participant(participant.Name, participant.Surname);
-                    updated.Jump(bestJump);
-                    updated.Jump(0);
-                    updated.Jump(0);
-                    Participants[index] = updated;
-                }
+                if (index < 0 || index >= Participants.Length) return;
+                Participant participant = Participants[index];
+                double bestJump = participant.BestJump;
+                Participant updated = new Participant(participant.Name, participant.Surname);
+                updated.Jump(bestJump);
+                updated.Jump(0);
+                updated.Jump(0);
+                Participants[index] = updated;
+
             }
-           
+
         }
         public class HighJump : Discipline
         {
             public HighJump() : base("High jump") { }
             public override void Retry(int index)
             {
-                if (index >= 0 && index < Participants.Length)
+                if (index < 0 || index >= Participants.Length) return;
+                Participant participant = Participants[index];
+                double[] jumps = participant.Jumps;
+                if(jumps == null || jumps.Length == 0) return;
+                for (int i = jumps.Length - 1; i >= 0; i--)
                 {
-                    Participant participant = Participants[index];
-                    double[] jumps = participant.Jumps;
-                    Participant updatedParticipant = new Participant(participant.Name, participant.Surname);
-
-                    if (jumps != null && jumps.Length > 0)
+                    if (jumps[i] != 0)
                     {
-                        for (int i = 0; i < jumps.Length - 1; i++)
-                        {
-                            updatedParticipant.Jump(jumps[i]);
-                        }
+                        jumps[i] = 0;
+                        break;
                     }
-
-                    Participants[index] = updatedParticipant;
                 }
-           
+                Participant updated = new Participant(participant.Name, participant.Surname);
+                foreach (var jump in jumps)
+                {
+                    if (jump != 0)
+                        updated.Jump(jump);
+                }
+                Participants[index] = updated;
+
+            }
+
         }
     }
 }
