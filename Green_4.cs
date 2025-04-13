@@ -108,6 +108,7 @@ namespace Lab_7
             }
             public void Add(Participant[] newParticipants)
             {
+                if (newParticipants == null) return;
                 Array.Resize(ref _participants, _participants.Length + newParticipants.Length);
                 for (int i = 0; i < newParticipants.Length; i++)
                 {
