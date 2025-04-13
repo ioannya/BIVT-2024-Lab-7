@@ -25,14 +25,23 @@ namespace Lab_7
 
             public string Name => _name;
             public string Surname => _surname;
-            public double[] Jumps => _res.ToArray();
+            public double[] Jumps
+            {
+                get
+                {
+                    if (_res == null) return null;
+                    double[] copy = new double[_res.Length];
+                    Array.Copy(_res, copy, _res.Length);
+                    return copy;
+                }
+            }
             public double BestJump
             {
                 get
                 {
                     if (_res == null || _res.Length == 0)
                     {
-                        return default;
+                        return 0;
                     }
                     return _res.Max();
                 }
